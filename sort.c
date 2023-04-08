@@ -88,22 +88,24 @@ void mergeSort(int pData[], int l, int r)
 {
 	if (l < r)
 	{
+		// find middle
 		int x = l + (r - l) / 2;
 
-		mergeSort(pData, l, x);
-		mergeSort(pData, x + 1, r);
+		mergeSort(pData, l, x);	// sort left half
+		mergeSort(pData, x + 1, r);	// sort right half
 
 		int n1 = x - l + 1;
 		int n2 = r - x;
 		int left[n1];
 		int right[n2];
 
+		// copy from main array to subarray
 		memcpy(left, &pData[l], n1 * sizeof(int));
 		memcpy(right, &pData[x + 1], n2 * sizeof(int));
 
 		int a = 0, b = 0, c = l;
 
-		while (a < n1 && b < n2)
+		while (a < n1 && b < n2)	// merge subarrays into main
 		{
 			if (left[a] <= right[b])
 			{
@@ -118,13 +120,13 @@ void mergeSort(int pData[], int l, int r)
 
 			c++;
 		}
-		while (a < n1)
+		while (a < n1)	// put remaining from main array to left
 		{
 			pData[c] = left[a];
 			a++;
 			c++;
 		}
-		while (b < n2)
+		while (b < n2)	// put remaining from main to right
 		{
 			pData[c] = right[b];
 			b++;
